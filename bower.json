@@ -1,0 +1,22 @@
+{
+  "name": "el.js",
+  "main": "el.js",
+  "version": "0.0.1",
+  "homepage": "https://github.com/benjaminapetersen/el.js",
+  "authors": [
+    "Benjamin A. Petersen <ben@benjaminapetersen.me>"
+  ],
+  "description": "An extremely light weight DOM manipulation util",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "chai": "~3.0.0",
+    "mocha": "~2.2.5"
+  }
+}

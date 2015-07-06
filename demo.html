@@ -1,0 +1,48 @@
+<html>
+<head>
+
+</head>
+<body>
+
+<h3>This is a demo</h3>
+<h4>This is a subheading</h4>
+<p class="target">This is a target paragraph.</p>
+<p>This is not a paragraph.</p>
+<p>This is a paragraph with a <strong>Strong</strong></p>
+<ul>
+  <li>Foo</li>
+  <li>Bar</li>
+  <li>Baz</li>
+</ul>
+
+
+<script src="./src/el.js"></script>
+<script>
+
+console.log('el object:');
+console.log(el);
+
+
+console.log('find:')
+var h3 = el.find('h3')[0];
+console.log(h3);
+
+console.log('add class:');
+el.addClass(h3, 'foo bar baz');
+console.log(h3);
+
+console.log('has class:');
+console.log(el.hasClass(h3, 'bar'));
+console.log(el.hasClass(h3, 'qux'));
+
+console.log('remove class:');
+el.removeClass(h3, 'foo bar');
+console.log(h3);
+
+
+
+
+
+</script>
+</body>
+</html>

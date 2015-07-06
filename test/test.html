@@ -1,0 +1,97 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Mocha Tests | el.js</title>
+    <link rel="stylesheet" href="../bower_components/mocha/mocha.css" />
+
+    <script src="../bower_components/chai/chai.js"></script>
+    <script src="../bower_components/mocha/mocha.js"></script>
+    <!-- ??
+    <script src="expect.js"></script>
+    -->
+    <script src="./test.helpers.js"></script>
+    <script src="../src/el.js"></script>
+    <script>
+        el.ready(function() {
+            describe('el.ready', function() {
+                it('should register handlers to fire when the document is ready', function() {
+                    var exists = el.find('#title')[0];
+                    expect(isElement(exists)).to.eql(true);
+                });
+            });
+        });
+    </script>
+    <style>
+        /* get this stuff out of the way */
+        #fixtures {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+        }
+        .bold {
+            font-weight: bold;
+            color: #990000;
+            border: 1px solid #990000;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="mocha"></div>
+    <div id="fixtures">
+        <p id="title">el.js</p>
+        <h3>This is a demo</h3>
+        <h4>This is a subheading</h4>
+        <p class="target">This is a target paragraph.</p>
+        <p>This is not a paragraph.</p>
+        <p>This is a paragraph with a <strong>Strong</strong></p>
+        <ul id="list">
+          <li class="item first">Foo</li>
+          <li class="item second">Bar</li>
+          <li class="item third">Baz</li>
+        </ul>
+        <p class="p1">This is a paragraph</p>
+        <p class="p2 has extra classes">This is a paragraph</p>
+        <p class="p3 fizzles">This is a paragraph</p>
+        <p class="p4 hobbits orcs goblins">This is a paragraph</p>
+        <p class="p5 elves dwarves gnomes">This is a paragraph</p>
+        <p class="p6">This is a paragraph</p>
+        <p class="p7">This is a paragraph</p>
+    </div>
+    <script>
+        mocha.setup('bdd');
+        //mocha.setup('tdd');
+    </script>
+    <script src="./el_test.spec.browser.js"></script>
+    <script>
+        mocha.checkLeaks();
+        mocha.run();
+    </script>
+
+    <script>
+
+        // console.log('el object:');
+        // console.log(el);
+
+
+        // console.log('find:')
+        // var h3 = el.find('h3')[0];
+        // console.log(h3);
+        // console.log('add class:');
+        // el.addClass(h3, 'foo bar baz');
+        // console.log(h3);
+
+        // console.log('has class:');
+        // console.log(el.hasClass(h3, 'bar'));
+        // console.log(el.hasClass(h3, 'qux'));
+
+        // console.log('remove class:');
+        // el.removeClass(h3, 'foo bar');
+        // console.log(h3);
+
+
+
+    </script>
+</body>
+</html>
