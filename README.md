@@ -102,4 +102,8 @@ h3.click();
 h3.click();
 ```
 
+## Tests
+
+To run the tests, `bower install` from the root directory, then load `./tests/test.html`
+to see the browser based tests.
 
