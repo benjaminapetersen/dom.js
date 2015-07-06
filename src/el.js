@@ -175,7 +175,7 @@
       };
 
 
-  this.el = {
+  var el = {
     find: find,
     addClass: addClass,
     removeClass: removeClass,
@@ -186,6 +186,12 @@
     off: off,
     once: once,
     ready: docReady
+  };
+
+  // exports
+  this.el = el;
+  if (typeof module !== 'undefined' && module.exports) {
+    module.exports = el;
   }
 
 }).call(this);
