@@ -2,6 +2,9 @@
 // inspiration drawn from these two resources:
 // - http://youmightnotneedjquery.com/
 // - https://www.muicss.com jqLite impl
+//
+// and of course, jQuery!
+//
 'use strict';
 
 (function() {
