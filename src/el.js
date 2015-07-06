@@ -172,48 +172,20 @@
           readyListenerRegistered = true;
           _docRegister();
         };
-      },
-
-      // *experimental*
-      wrap = function(elem) {
-        return new El(elem);
-      }
+      };
 
 
-
-  // *Conceptual*
-  //
-  // allow for chaining?  or unnecessary?
-  // this would be intereseting:
-  // - can you tap into css animations?
-  //   wait for them to finish?
-  // var elem = el.findOne('.foo')
-  //              .wrap()
-  //              .addClass('bar')
-  //              .delay(2000)
-  //              .removeClass('bar')
-  //              .delay(200)
-  //              .css('border', '1px solid #990000')
-  //
-  // var El = function(elem) {
-  //   this.elem = elem;
-  // };
-  // El.prototype = this.el;
-  // El.constructor = El;
-
-  // TODO: does it care about utils from lang.js?
   this.el = {
     find: find,
     addClass: addClass,
     removeClass: removeClass,
     hasClass: hasClass,
-    offset: '', // or position?
+    offset: '',           // or position?
     css: '',
     on: on,
     off: off,
     once: once,
-    ready: docReady //,
-    //wrap: wrap
+    ready: docReady
   }
 
 }).call(this);
