@@ -14,7 +14,9 @@
       readyFired = false,
       readyListenerRegistered = false,
 
-      // simple internal iterator
+
+      // collection
+      // ---------------------------------------------------------
       _each = function(arr, fn) {
         for(var i= 0; i< arr.length; i++) {
           fn(arr[i], i, arr);
@@ -25,17 +27,13 @@
         return doc.querySelectorAll(selector);
       },
 
-      // class manipulation
-      _getClasses = function(elem) {
-        if(!elem) {
-          return;
-        }
-        if(elem.classList) {
-          return elem.classList;
-        }
-        return elem.className.split(' ');
+      remove = function(el) {
+        return el.parentNode.removeChild(el);
       },
 
+
+      // class manipulation
+      // ---------------------------------------------------------
 
       // internal function for single class addition.
       // public interface allows for multiple
@@ -88,19 +86,97 @@
         elem.className.search(className);
       },
 
+      css = function(elem, prop, val) {
+        if(val) {
+          return (elem.style[prop] = val);
+        }
+        if(prop) {
+          return getComputedStyle(elem)[prop];
+        }
+        return getComputedStyle(elem);
+      },
+
+      attr = function(elem, attrib, val) {
+        if(!val) {
+          return elem.getAttribute(attrib);
+        }
+        elem.setAttribute(attrib, val);
+      },
+
+      // convenience
+      // ---------------------------------------------------------
+      show = function(elem) {
+        elem.style.display = '';
+      },
+
+      hide = function(elem) {
+        elem.style.display = 'none';
+      },
+
+      // content update
+      // ---------------------------------------------------------
+      text = function(elem) {
+        return elem.textContent;
+      },
+
+      html = function(elem, str) {
+        elem.innerHTML = str;
+      },
+
+
+      // related nodes
+      // ---------------------------------------------------------
+      append = function(elem, child) {
+        elem.appendChild(child);
+      },
+
+      prepend = function(elem, child) {
+        elem.insertBefore(child, elem.firstChild);
+      },
+
+      next = function(elem) {
+        return elem.nextElementSibling;
+      },
+
+      prev = function(elem) {
+        return elem.previousElementSibling;
+      },
+
+      parent = function(elem) {
+        return elem.parentNode;
+      },
+
+      // positioning
+      // ---------------------------------------------------------
+      offset = function(elem) {
+        var rect = elem.getBoundingClientRect();
+        return {
+          top: rect.top + document.body.scrollTop,
+          left: rect.left + document.body.scrollLeft
+        };
+      },
+
+      position = function(elem) {
+        return {
+          left: elem.offsetLeft,
+          top: elem.offsetTop
+        };
+      },
+
       // events
+      // ---------------------------------------------------------
       on = function(elem, type, fn, capture) {
         if(!elem && !type && !fn) {
           return;
         }
-        elem.addEventListener(type, fn, capture ? true : false);
+        elem.addEventListener(type, fn, !!capture);
       },
 
       off = function(elem, type, fn, capture) {
         if(!elem && !type && !fn) {
           return;
         }
-        elem.removeEventListener(type, fn, capture ? true : false);
+        elem.removeEventListener(type, fn, !!capture);
       },
 
       once = function(elem, type, fn, capture) {
@@ -113,19 +189,8 @@
         }, capture);
       },
 
-      _setStyle = function(elem, prop, val) {
-        elem.style[prop] = val;
-      },
-
-      // css
-      css = function(elem, prop, val) {
-        if(!prop) {
-          return getComputedStyle(elem);
-        }
-
-      },
-
-      // document ready handlers
+      // doc ready
+      // ---------------------------------------------------------
       _docIsReady = function() {
         return document.readyState === 'complete';
       },
@@ -133,7 +198,7 @@
       _docReady = function() {
         if(!readyFired) {
           readyFired = true;
-          _each(docReadyQueue, function(item, i) {
+          _each(docReadyQueue, function(item) {
             item.call(root);
           });
           docReadyQueue = [];
@@ -153,7 +218,7 @@
         } else {
           document.attachEvent('onreadystatechange', _docReadyStateChange);
           window.attachEvent('onload', _docReady);
-        };
+        }
       },
 
       docReady = function(fn) {
@@ -164,24 +229,36 @@
           return;
         } else {
           docReadyQueue.push(fn);
-        };
+        }
         // then deal with initial event listener setup
         if(_docIsReady()) {
           setTimeout(_docReady, 1);
         } else if(!readyListenerRegistered) {
           readyListenerRegistered = true;
           _docRegister();
-        };
+        }
       };
-
 
   var el = {
     find: find,
+    remove: remove,
+    append: append,
+    prepend: prepend,
     addClass: addClass,
     removeClass: removeClass,
     hasClass: hasClass,
-    offset: '',           // or position?
-    css: '',
+    attr: attr,
+    css: css,
+    show: show,
+    hide: hide,
+    text: text,
+    html: html,
+    next: next,
+    prev: prev,
+    parent: parent,
+    offset: offset,
+    position: position,
+    // css: '',
     on: on,
     off: off,
     once: once,

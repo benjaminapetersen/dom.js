@@ -1,0 +1,129 @@
+<html>
+<head>
+
+</head>
+<body>
+
+<h3>This is a demo</h3>
+<h4>This is a subheading</h4>
+<span class="move-me">move me</span>
+<span class="move-me-again">move me again</span>
+<p class="removed">This will be removed</p>
+<p class="attr">This will get an attr</p>
+<p class="style">This will get a style</p>
+<p class="show-me">Hidden, but will appear</p>
+<p class="hide-me">Visible, but will be hidden</p>
+<p class="has-text">This is a target paragraph.</p>
+<div class="append"><span>foo</span><span> bar</span></div>
+<div class="prepend"><span>foo</span><span> bar</span></div>
+<p>This is not a paragraph.</p>
+<p>This is a paragraph with a <strong class="offset">Strong</strong></p>
+<ul>
+  <li class="item first"><a href="#" class="foo">Foo</a></li>
+  <li class="item second"><a href="#" class="bar">Bar</a></li>
+  <li class="item third"><a href="#" class="baz">Baz</a></li>
+</ul>
+<div class="parent">
+  <div class="child">
+    parent/child
+  </div>
+</div>
+
+<script src="../src/el.js"></script>
+<script src="./utils.js"></script>
+<script>
+el.ready(function() {
+  console.log('el.js demo');
+
+  // .find()
+  var h3 = el.find('h3')[0];
+  console.log('find():', isElement(el.find('h3')[0]));
+
+  // .remove()
+  el.remove(el.find('.removed')[0]);
+  console.log('remove():', el.find('.removed')[0] === undefined);
+
+  // .addClass()
+  el.addClass(h3, 'foo bar baz');
+  console.log('addClass():', h3.className === 'foo bar baz');
+
+  // .hasClass()
+  console.log('hasClass():', el.hasClass(h3, 'bar') === true,  el.hasClass(h3, 'qux') === false);
+
+  // .removeClass()
+  el.removeClass(h3, 'foo bar');
+  console.log('removeClass():', h3.className === 'baz');
+
+  // .attr()
+  var attr = el.find('.attr')[0];
+  el.attr(attr, 'shizzle', 'pop');
+  console.log('attr():', el.attr(attr, 'shizzle') === 'pop');
+
+  // .css()
+  var style = el.find('.style')[0];
+  el.css(style, 'border', '1px dashed #990000');
+  el.css(style, 'font-weight', 'bold');
+  el.css(style, 'color', '#990000');
+  console.log('css():', el.css(attr, 'border') === '0px none rgb(0, 0, 0)', typeof el.css(attr) === 'object');
+
+  // .show()
+  var toShow = el.find('.show-me')[0];
+  el.show(toShow);
+  console.log('.show()', el.css(toShow, 'display') === 'block');
+
+  // .hide()
+  var toHide = el.find('.hide-me')[0];
+  el.hide(toHide);
+  console.log('.hide()', el.css(toHide, 'display') === 'none');
+
+  // .on()
+  el.on(el.find('.first a')[0], 'click', function(evt) {
+    console.log('.first clicked');
+  });
+
+  // .off()
+  var second =  el.find('.second a')[0];
+  var callback = function(evt) {
+    console.log('.second NOT clicked, this should never run');
+  }
+  el.on(second, 'click', callback);
+  el.off(second, 'click', callback);
+
+  // .once()
+  var count = 1;
+  el.once(el.find('.third a')[0], 'click', function() {
+    console.log('.third clicked:', count++, 'times');
+  });
+
+  // .text()
+  console.log('.text():', el.text(el.find('.has-text')[0]) === 'This is a target paragraph.');
+
+  // .append()
+  var toAppend = el.find('.append')[0];
+  el.append(toAppend, el.find('.move-me')[0]);
+  console.log('.append():', toAppend);
+
+  // .prepend()
+  var toPrepend = el.find('.prepend')[0];
+  el.prepend(toPrepend, el.find('.move-me-again')[0]);
+  console.log('.prepend():', toPrepend);
+
+  // .next()
+  console.log('.next():', el.next(el.find('.first')[0]) === el.find('.second')[0]);
+
+  // .prev()
+  console.log('.prev():', el.prev(el.find('.second')[0]) === el.find('.first')[0]);
+
+  // .parent()
+  console.log('.parent():', el.parent(el.find('.child')[0]) === el.find('.parent')[0]);
+
+  // .offset()
+  console.log('.offset():', el.offset( el.find('.offset')[0] ) );
+
+  // .position()
+  console.log('.position():', el.position( el.find('.offset')[0] ) );
+
+});
+</script>
+</body>
+</html>
