@@ -1,6 +1,10 @@
 (function() {
   'use strict';
 
+  // tests:
+  // - chai expect http://chaijs.com/
+  // - mocha runner https://mochajs.org/
+  // why not Jasmine to get it all in once?  dunno.
   var expect = chai.expect;
 
   describe("el.js", function() {
@@ -12,7 +16,6 @@
     describe('DOM query', function() {
       describe('.find( )', function() {
         it('should find a DOM node by given string selector', function() {
-          //expect(slice([1,2,3,4,5], 2, 5)).to.equal([3, 4, 5]);
           var h3 = el.find('h3')[0],
               p = el.find('p.target')[0],
               li = el.find('li.first')[0];
@@ -22,7 +25,7 @@
         });
       });
 
-
+ 
       describe('.remove( )', function() {
         it('should remove a DOM node from the tree', function() {
           var toRemove = el.find('.removed')[0];
@@ -155,25 +158,25 @@
     describe('related nodes', function() {
 
       describe('.next( )', function() {
-
+        // console.log('.next():', el.next(el.find('.first')[0]) === el.find('.second')[0]);
       });
 
       describe('.prev( )', function() {
-
+        // console.log('.prev():', el.prev(el.find('.second')[0]) === el.find('.first')[0]);
       });
 
       describe('.parent( )', function() {
-
+        // console.log('.parent():', el.parent(el.find('.child')[0]) === el.find('.parent')[0]);
       });
     });
 
     describe('positioning', function() {
 
       describe('.offset( )', function() {
-
+        // console.log('.offset():', el.offset( el.find('.offset')[0] ) );
       });
       describe('.position( )', function() {
-
+        // console.log('.position():', el.position( el.find('.offset')[0] ) );
       });
     });
 

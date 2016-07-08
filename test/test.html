@@ -19,13 +19,13 @@
         (function() {
           var expect = chai.expect;
           el.ready(function() {
+              // this test exists in the head of the document (and apart from the
+              // rest of the tests) before the <p id="title"> is rendered (below).
+              // Therefore, it is proof that el.ready is doing its job if the
+              // el.find() inside is able to return a DOM node.
               describe('el.js', function() {
                   describe('ready', function() {
                     it('should register handler functions to fire when the document is ready', function() {
-                        // this code exists in the head of the document, before the
-                        // <p id="title"> is rendered (below). Therefore, it is proof
-                        // that el.ready is doing its job if the el.find inside is able
-                        // to return a DOM node.
                         var exists = el.find('#title')[0];
                         expect(isElement(exists)).to.eql(true);
                     });
