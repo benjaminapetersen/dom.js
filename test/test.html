@@ -10,16 +10,29 @@
     <script src="expect.js"></script>
     -->
     <script src="./test.helpers.js"></script>
-    <script src="../src/el.js"></script>
+    <script src="../dist/el.js"></script>
     <script>
-        el.ready(function() {
-            describe('el.ready', function() {
-                it('should register handlers to fire when the document is ready', function() {
-                    var exists = el.find('#title')[0];
-                    expect(isElement(exists)).to.eql(true);
-                });
-            });
-        });
+        mocha.setup('bdd');
+        //mocha.setup('tdd');
+    </script>
+    <script>
+        (function() {
+          var expect = chai.expect;
+          el.ready(function() {
+              describe('el.js', function() {
+                  describe('ready', function() {
+                    it('should register handler functions to fire when the document is ready', function() {
+                        // this code exists in the head of the document, before the
+                        // <p id="title"> is rendered (below). Therefore, it is proof
+                        // that el.ready is doing its job if the el.find inside is able
+                        // to return a DOM node.
+                        var exists = el.find('#title')[0];
+                        expect(isElement(exists)).to.eql(true);
+                    });
+                  });
+              });
+          });
+        })();
     </script>
     <style>
         /* get this stuff out of the way */
@@ -40,17 +53,21 @@
 
     <div id="mocha"></div>
     <div id="fixtures">
+
         <p id="title">el.js</p>
         <h3>This is a demo</h3>
         <h4>This is a subheading</h4>
+
         <p class="target">This is a target paragraph.</p>
         <p>This is not a paragraph.</p>
         <p>This is a paragraph with a <strong>Strong</strong></p>
+
         <ul id="list">
           <li class="item first">Foo</li>
           <li class="item second">Bar</li>
           <li class="item third">Baz</li>
         </ul>
+
         <p class="p1">This is a paragraph</p>
         <p class="p2 has extra classes">This is a paragraph</p>
         <p class="p3 fizzles">This is a paragraph</p>
@@ -58,40 +75,38 @@
         <p class="p5 elves dwarves gnomes">This is a paragraph</p>
         <p class="p6">This is a paragraph</p>
         <p class="p7">This is a paragraph</p>
+
+        <h4>Another subheading</h4>
+        <span class="move-me">move me</span>
+        <span class="move-me-again">move me again</span>
+        <p class="removed">This will be removed</p>
+        <p class="attr" snapple="banana">This will get an attr</p>
+        <p class="style">This will get a style</p>
+        <p class="show-me">Hidden, but will appear</p>
+        <p class="hide-me">Visible, but will be hidden</p>
+        <p class="has-text">This is a target paragraph.</p>
+        <p class="set-text"></p>
+        <div class="append"><span>foo</span><span> bar</span></div>
+        <div class="prepend"><span>foo</span><span> bar</span></div>
+        <p>This is not a paragraph.</p>
+        <p>This is a paragraph with a <strong class="offset">Strong</strong></p>
+        <ul>
+          <li class="item first"><a href="#" class="foo">Foo</a></li>
+          <li class="item second"><a href="#" class="bar">Bar</a></li>
+          <li class="item third"><a href="#" class="baz">Baz</a></li>
+        </ul>
+
+        <div class="parent">
+          <div class="child">
+            parent/child
+          </div>
+        </div>
+
     </div>
-    <script>
-        mocha.setup('bdd');
-        //mocha.setup('tdd');
-    </script>
     <script src="./el_test.spec.browser.js"></script>
     <script>
         mocha.checkLeaks();
         mocha.run();
-    </script>
-
-    <script>
-
-        // console.log('el object:');
-        // console.log(el);
-
-
-        // console.log('find:')
-        // var h3 = el.find('h3')[0];
-        // console.log(h3);
-        // console.log('add class:');
-        // el.addClass(h3, 'foo bar baz');
-        // console.log(h3);
-
-        // console.log('has class:');
-        // console.log(el.hasClass(h3, 'bar'));
-        // console.log(el.hasClass(h3, 'qux'));
-
-        // console.log('remove class:');
-        // el.removeClass(h3, 'foo bar');
-        // console.log(h3);
-
-
-
     </script>
 </body>
 </html>

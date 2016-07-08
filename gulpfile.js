@@ -32,7 +32,6 @@
       tmpAll = tmpBuild + match.recurse;
 
   var srcJS = src + match.recurse + '.js',
-      srcView = src + '/views/'+ match.recurse + '.html',
       srcLess = src + '/less/' + match.recurse + '.less';
 
   var outputJS = 'el.js';
@@ -42,8 +41,6 @@
     src + 'directives/**/*.js',
     src + 'services/**/*.js'
   ];
-
-  var angularModuleName = 'key-value-editor';
 
 
   var concatSource = function(outputDest) {
@@ -76,16 +73,16 @@
             .pipe(jshint.reporter(stylish));
   });
 
-  gulp.task('less', ['clean'], function () {
-    return gulp
-            .src(srcLess)
-            .pipe(less({
-              paths: [ path.join(__dirname, 'less', 'includes') ]
-            }))
-            .pipe(gulp.dest(dist));
-  });
+  // gulp.task('less', ['clean'], function () {
+  //   return gulp
+  //           .src(srcLess)
+  //           .pipe(less({
+  //             paths: [ path.join(__dirname, 'less', 'includes') ]
+  //           }))
+  //           .pipe(gulp.dest(dist));
+  // });
 
-  gulp.task('build', ['clean', 'jshint', 'less'], function () {
+  gulp.task('build', ['clean', 'jshint'], function () {
     return concatSource();
   });
 

@@ -17,12 +17,14 @@
 
       // collection
       // ---------------------------------------------------------
-      _each = function(arr, fn) {
+      each = function(arr, fn) {
         for(var i= 0; i< arr.length; i++) {
           fn(arr[i], i, arr);
         }
       },
 
+      // DOM query
+      // ---------------------------------------------------------
       find = function(selector) {
         return doc.querySelectorAll(selector);
       },
@@ -32,7 +34,7 @@
       },
 
 
-      // class manipulation
+      // class and attribute manipulation
       // ---------------------------------------------------------
 
       // internal function for single class addition.
@@ -54,7 +56,7 @@
         if(!elem && !classes) {
           return;
         }
-        _each(classes.split(' '), function(item) {
+        each(classes.split(' '), function(item) {
           _addClass(elem, item);
         });
       },
@@ -71,7 +73,7 @@
         if(!elem && !classes) {
           return;
         }
-         _each(classes.split(' '), function(item) {
+         each(classes.split(' '), function(item) {
           _removeClass(elem, item);
         });
       },
@@ -97,14 +99,12 @@
       },
 
       attr = function(elem, attrib, val) {
-        if(!val) {
-          return elem.getAttribute(attrib);
+        if(val) {
+          return (elem.setAttribute(attrib, val));
         }
-        elem.setAttribute(attrib, val);
+        return elem.getAttribute(attrib);
       },
 
-      // convenience
-      // ---------------------------------------------------------
       show = function(elem) {
         elem.style.display = '';
       },
@@ -115,17 +115,20 @@
 
       // content update
       // ---------------------------------------------------------
-      text = function(elem) {
+      text = function(elem, str) {
+        if(str) {
+          return (elem.textContent = str);
+        }
         return elem.textContent;
       },
 
       html = function(elem, str) {
-        elem.innerHTML = str;
+        if(str) {
+          return (elem.innerHTML = str);
+        }
+        return elem.innerHTML;
       },
 
-
-      // related nodes
-      // ---------------------------------------------------------
       append = function(elem, child) {
         elem.appendChild(child);
       },
@@ -134,6 +137,8 @@
         elem.insertBefore(child, elem.firstChild);
       },
 
+      // related nodes
+      // ---------------------------------------------------------
       next = function(elem) {
         return elem.nextElementSibling;
       },
@@ -198,7 +203,7 @@
       _docReady = function() {
         if(!readyFired) {
           readyFired = true;
-          _each(docReadyQueue, function(item) {
+          each(docReadyQueue, function(item) {
             item.call(root);
           });
           docReadyQueue = [];
@@ -240,10 +245,12 @@
       };
 
   var el = {
+    // collection
+    each: each,
+    // DOM query
     find: find,
     remove: remove,
-    append: append,
-    prepend: prepend,
+    // class and attribute manipulation
     addClass: addClass,
     removeClass: removeClass,
     hasClass: hasClass,
@@ -251,17 +258,23 @@
     css: css,
     show: show,
     hide: hide,
+    // content
+    append: append,
+    prepend: prepend,
     text: text,
     html: html,
+    // related nodes
     next: next,
     prev: prev,
     parent: parent,
+    // positioning
     offset: offset,
     position: position,
-    // css: '',
+    // events
     on: on,
     off: off,
     once: once,
+    // DOM ready
     ready: docReady
   };
 

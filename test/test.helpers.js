@@ -1,19 +1,14 @@
-// a node can be an element node, an attr node, text node, or all kinds of things.
-function isNode(obj){
-  if(typeof Node === 'object') {
-    return obj instanceof Node;
-  } else {
-    return obj && (typeof obj ==='object') && (typeof obj.nodeType === 'number') && (typeof obj.nodeName==='string');
-  }
+// node is the base data type of the DOM
+// a node can be an element, attribute, text, etc.
+var isNode = function(o){
+  return (typeof Node === 'object') ?
+          o instanceof Node :
+          o && (typeof o === 'object') && (typeof o.nodeType === 'number') && (typeof o.nodeName==='string');
+};
 
-}
-
-
-// an element is everything from start tag to end tag
-function isElement(obj){
-  if(typeof HTMLElement === 'object') {
-    return obj instanceof HTMLElement;
-  } else {
-    return obj && (typeof obj === 'object') && (obj !== null) && (obj.nodeType === 1) && (typeof obj.nodeName==='string');
-  }
-}
+// a DOM element
+var isElement = function(o){
+  return (typeof HTMLElement === 'object') ?
+            o instanceof HTMLElement :
+            o && (typeof o === 'object') && (o !== null) && (o.nodeType === 1) && (typeof o.nodeName==='string');
+};
