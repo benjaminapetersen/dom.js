@@ -256,7 +256,7 @@
         }
       };
 
-  var el = {
+  var dom = {
     // collection
     each: each,
     head: head,
@@ -296,9 +296,9 @@
   };
 
   // exports
-  this.el = el;
+  this.dom = dom;
   if (typeof module !== 'undefined' && module.exports) {
-    module.exports = el;
+    module.exports = dom;
   }
 
 }).call(this);

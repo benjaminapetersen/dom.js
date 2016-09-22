@@ -34,7 +34,7 @@
   var srcJS = src + match.recurse + '.js',
       srcLess = src + '/less/' + match.recurse + '.less';
 
-  var outputJS = 'el.js';
+  var outputJS = 'dom.js';
 
   var buildSource = [
     src + '*.js',
