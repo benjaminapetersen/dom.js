@@ -27,8 +27,10 @@
     "describe": true,
     "it": true,
     "el": true,
+    "Elem": true,
     "isElement": true,
     "isNode": true,
+    "isNodeList" : true,
     "chai": true
   }
 }

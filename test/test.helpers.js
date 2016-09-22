@@ -12,3 +12,8 @@ var isElement = function(o){
             o instanceof HTMLElement :
             o && (typeof o === 'object') && (o !== null) && (o.nodeType === 1) && (typeof o.nodeName==='string');
 };
+
+
+var isNodeList = function(list) {
+  return NodeList.prototype.isPrototypeOf(list);
+}

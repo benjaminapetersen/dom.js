@@ -1,13 +1,15 @@
-// initial implementation
 // inspiration drawn from these two resources:
 // - http://youmightnotneedjquery.com/
 // - https://www.muicss.com jqLite impl
 //
 // and of course, jQuery!
 //
-'use strict';
-
+// TODO: if this continues to grow, consider putting the fns in
+// separate files to isolate dev.  Similarly, break the tests out
+// into corresponding files.
 (function() {
+  'use strict';
+
   var root = this,
       doc = window.document,
       docReadyQueue = [],
@@ -21,6 +23,16 @@
         for(var i= 0; i< arr.length; i++) {
           fn(arr[i], i, arr);
         }
+      },
+
+      head = function(list) {
+        return list && list[0];
+      },
+
+
+      tail = function(list) {
+        console.warn('el.tail incorrect API: last returns array.length -1, tail should return "all but first"');
+        return list && list[list.length - 1];
       },
 
       // DOM query
@@ -247,6 +259,10 @@
   var el = {
     // collection
     each: each,
+    head: head,
+    tail: tail,
+    first: head,  // alias
+    last: tail,   // alias
     // DOM query
     find: find,
     remove: remove,
@@ -271,6 +287,7 @@
     offset: offset,
     position: position,
     // events
+    // consider "convenience" of click, dblclick, etc?
     on: on,
     off: off,
     once: once,

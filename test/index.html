@@ -1,0 +1,115 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Mocha Tests | el.js</title>
+    <link rel="stylesheet" href="../bower_components/mocha/mocha.css" />
+
+    <script src="../bower_components/chai/chai.js"></script>
+    <script src="../bower_components/mocha/mocha.js"></script>
+    <!-- ??
+    <script src="expect.js"></script>
+    -->
+    <script src="./test.helpers.js"></script>
+    <script src="../dist/el.js"></script>
+    <script src="../src/elem.js"></script>
+    <script>console.log('TODO: elem.js is src()', '');</script>
+    <script>
+        mocha.setup('bdd');
+        //mocha.setup('tdd');
+    </script>
+    <script>
+        (function() {
+          var expect = chai.expect;
+          el.ready(function() {
+              // this test exists in the head of the document (and apart from the
+              // rest of the tests) before the <p id="title"> is rendered (below).
+              // Therefore, it is proof that el.ready is doing its job if the
+              // el.find() inside is able to return a DOM node.
+              describe('el.js', function() {
+                  describe('ready', function() {
+                    it('should register handler functions to fire when the document is ready', function() {
+                        var exists = el.find('#title')[0];
+                        expect(isElement(exists)).to.eql(true);
+                    });
+                  });
+              });
+          });
+        })();
+    </script>
+    <style>
+        /* get this stuff out of the way */
+        #fixtures {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+        }
+        .bold {
+            font-weight: bold;
+            color: #990000;
+            border: 1px solid #990000;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="mocha"></div>
+    <div id="fixtures">
+
+        <p id="title">el.js</p>
+        <h3>This is a demo</h3>
+        <h4>This is a subheading</h4>
+
+        <p class="target">This is a target paragraph.</p>
+        <p>This is not a paragraph.</p>
+        <p>This is a paragraph with a <strong>Strong</strong></p>
+
+        <ul id="list">
+          <li class="item first">Foo</li>
+          <li class="item second">Bar</li>
+          <li class="item third">Baz</li>
+        </ul>
+
+        <p class="p1">This is a paragraph</p>
+        <p class="p2 has extra classes">This is a paragraph</p>
+        <p class="p3 fizzles">This is a paragraph</p>
+        <p class="p4 hobbits orcs goblins">This is a paragraph</p>
+        <p class="p5 elves dwarves gnomes">This is a paragraph</p>
+        <p class="p6">This is a paragraph</p>
+        <p class="p7">This is a paragraph</p>
+
+        <h4>Another subheading</h4>
+        <span class="move-me">move me</span>
+        <span class="move-me-again">move me again</span>
+        <p class="removed">This will be removed</p>
+        <p class="attr" snapple="banana">This will get an attr</p>
+        <p class="style">This will get a style</p>
+        <p class="show-me">Hidden, but will appear</p>
+        <p class="hide-me">Visible, but will be hidden</p>
+        <p class="has-text">This is a target paragraph.</p>
+        <p class="set-text"></p>
+        <div class="append"><span>foo</span><span> bar</span></div>
+        <div class="prepend"><span>foo</span><span> bar</span></div>
+        <p>This is not a paragraph.</p>
+        <p>This is a paragraph with a <strong class="offset">Strong</strong></p>
+        <ul>
+          <li class="item first"><a href="#" class="foo">Foo</a></li>
+          <li class="item second"><a href="#" class="bar">Bar</a></li>
+          <li class="item third"><a href="#" class="baz">Baz</a></li>
+        </ul>
+
+        <div class="parent">
+          <div class="child">
+            parent/child
+          </div>
+        </div>
+
+    </div>
+    <script src="./el.spec.browser.js"></script>
+    <script src="./elem.spec.browser.js"></script>
+    <script>
+        mocha.checkLeaks();
+        mocha.run();
+    </script>
+</body>
+</html>
