@@ -1,4 +1,4 @@
-# el.js
+# dom.js
 
 An extremely light weight DOM manipulation utility library.
 
@@ -12,58 +12,58 @@ Note: the API is intentionally different than that of jQuery.
 
 ## Examples
 
-### el.ready
+### dom.ready
 
-Use el.ready as a simple registry for document.ready:
+Use dom.ready as a simple registry for document.ready:
 
 ```javascript
-el.ready(function() {
+dom.ready(function() {
   // do your stuff here...
 });
 ```
 
-### el.find
+### dom.find
 
-Use el.find to query the DOM for nodes.  Returns an array:
+Use dom.find to query the DOM for nodes.  Returns an array:
 
 ```javascript
-el.find('.class');
+dom.find('.class');
 
-var firstElem = el.find('.class')[0];
+var firstElem = dom.find('.class')[0];
 ```
 
-### el.addClass
+### dom.addClass
 
 ```javascript
-var elem = el.find('.foo')[0];
-el.addClass(elem, 'bar');
+var elem = dom.find('.foo')[0];
+dom.addClass(elem, 'bar');
 ```
 
-### el.removeClass
+### dom.removeClass
 
 ```javascript
-var elem = el.find('.foo')[0];
-el.removeClass(elem, 'foo');
+var elem = dom.find('.foo')[0];
+dom.removeClass(elem, 'foo');
 ```
 
-### el.hasClass
+### dom.hasClass
 
 
 ```javascript
-var elem = el.find('.foo')[0];
-if(el.hasClass(elem, 'bar')) {
-  el.removeClass(elem, 'bar');
+var elem = dom.find('.foo')[0];
+if(dom.hasClass(elem, 'bar')) {
+  dom.removeClass(elem, 'bar');
 } else {
-  el.addClass('baz');
+  dom.addClass('baz');
 }
 ```
 
-### el.on
+### dom.on
 
 ```javascript
-var h3 = el.find('h3')[0];
+var h3 = dom.find('h3')[0];
 
-el.on(h3, 'click', function() {
+dom.on(h3, 'click', function() {
   // do stuff
 });
 
@@ -71,29 +71,29 @@ h3.click();
 ```
 
 
-### el.off
+### dom.off
 
 ```javascript
-var h3 =  el.find('h3')[0],
+var h3 =  dom.find('h3')[0],
           callback = function() {
             // do stuff
           };
 
-el.on(h3, 'click', callback);
-el.off(h3, 'click', callback);
+dom.on(h3, 'click', callback);
+dom.off(h3, 'click', callback);
 
 h3.click();
 ```
-### el.once
+### dom.once
 
 ```javascript
 var test = 0,
-    h3 = el.find('h3')[0],
+    h3 = dom.find('h3')[0],
     callback = function() {
       test += 1;
     };
 
-el.once(h3, 'click', callback);
+dom.once(h3, 'click', callback);
 
 // callback will only be called once,
 // test will = 1
@@ -106,4 +106,3 @@ h3.click();
 
 To run the tests, `bower install` from the root directory, then load `./tests/test.html`
 to see the browser based tests.
-
